@@ -15,6 +15,9 @@ import javax.swing.*;
 import recursos.Utilidades;
 import vistas.ModuloGeneral;
 
+/**
+ * @author paramo
+ */
 public class PnlHead extends JPanel {
 
 	private ModuloGeneral moduloActual;

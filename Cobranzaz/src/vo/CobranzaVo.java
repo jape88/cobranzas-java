@@ -2,6 +2,9 @@ package vo;
 
 import java.io.Serializable;
 
+/**
+ * @author paramo
+ */
 public class CobranzaVo  implements Serializable {
 
 	private long id;

@@ -14,6 +14,9 @@ import recursos.Utilidades;
 import vistas.InfoView;
 import vistas.Inicio;
 
+/**
+ * @author paramo
+ */
 public class PnlFooter extends JPanel {
 
 	private JLabel desarrollo;
@@ -34,7 +37,7 @@ public class PnlFooter extends JPanel {
 		FlowLayout flowLayout = (FlowLayout) getLayout();
 		flowLayout.setAlignment(FlowLayout.CENTER);
 		//flowLayout.setVgap(5);
-		desarrollo = new JLabel("Software de gestión de cobranza - © - All rights reserved - 2020 - ");
+		desarrollo = new JLabel("Software de gestión de cobranza - © - All rights reserved - 2021 - ");
 		desarrollo.setForeground(Color.BLACK);
 		desarrollo.setFont(new Font("Cambria", Font.BOLD, 14));
 		desarrollo.setHorizontalAlignment(SwingConstants.RIGHT);

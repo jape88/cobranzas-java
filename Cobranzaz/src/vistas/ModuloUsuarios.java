@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import logica.Logica;
+import controladores.Logica;
 import paneles.PnlConFondo;
 import paneles.PnlFooter;
 import paneles.PnlHead;
@@ -38,7 +38,11 @@ import javax.swing.UIManager;
 import java.awt.FlowLayout;
 import javax.swing.DefaultComboBoxModel;
 
-public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
+/**
+ * @author paramo
+ * Módulo para gestión de usuarios
+ */
+public class ModuloUsuarios extends ModuloGeneral implements ActionListener,IModulosTemplate {
 
 	private JPanel contentPane;
 	private Logica logica;
@@ -86,7 +90,7 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 781, 588);
 		setLocationRelativeTo(null);
-		setTitle("Sistema de gestión de datos GNA");
+		setTitle("Sistema de gestión de datos usuarios");
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -110,7 +114,7 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		((PnlHead) panelHead).getLblModulo().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Todo lo rico");
+				reiniciar();
 			}
 		});
 
@@ -127,7 +131,7 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		pnlConFondo.setBounds(10, 141, 751, 185);
 		panelCenter.add(pnlConFondo);
 
-		JLabel lblNombre = new JLabel("Codigo");
+		JLabel lblNombre = new JLabel("Código");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNombre.setBounds(10, 25, 80, 20);
 		pnlConFondo.add(lblNombre);
@@ -283,7 +287,7 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		panelCenter.add(btnCancelar);
 
 		txtBuscar = new JTextField();
-		txtBuscar.setText("Busqueda por cedula, nombre o telefono");
+		txtBuscar.setText("Busqueda por cedula, nombre o teléfono");
 		txtBuscar.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtBuscar.setForeground(Color.GRAY);
 		txtBuscar.setColumns(10);
@@ -454,11 +458,11 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		if (e.getSource() == btnAgregar) {
 
 			if (accionAgregar == 0) {
-				int res = JOptionPane.showConfirmDialog(this, "¿Desea agregar un nuevo usuario?", "GNA Software dice:",
+				int res = JOptionPane.showConfirmDialog(this, "¿Desea agregar un nuevo usuario?", "Software de gestión de cobranza dice:",
 						0);
 				if (res == 0) {
 					accionAgregar = 1;
-					limpiarCampos();
+					limpiar();
 					habilitarCampos();
 					habilitarBotones(false);
 					btnCancelar.setEnabled(true);
@@ -471,7 +475,7 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 			if (usuarioSelecionado != null) {
 				if (accionModificar == 0) {
 					int res = JOptionPane.showConfirmDialog(this, "¿Desea modicar los datos del usuario?",
-							"GNA Software dice:", 0);
+							"Software de gestión de cobranza dice:", 0);
 					if (res == 0) {
 						accionModificar = 1;
 						// limpiarCampos();
@@ -491,15 +495,15 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 			if (usuarioSelecionado != null) {
 
 				int res = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea elimnar el usuario?",
-						"GNA Software dice:", 0);
+						"Software de gestión de cobranza dice:", 0);
 				if (res == 0) {
-					String codigo = JOptionPane.showInputDialog("Ingrese codigo de seguridad");
+					String codigo = JOptionPane.showInputDialog("Ingrese código de seguridad");
 					if (codigo.equals("25057")) {
 						eliminarUsuario();
 						usuarioSelecionado = null;
 						cargarUsuarios();
 					} else
-						JOptionPane.showMessageDialog(this, "Codigo incorrecto, por favor intente nuevamente");
+						JOptionPane.showMessageDialog(this, "Código incorrecto, por favor intente nuevamente");
 				}
 
 			} else
@@ -513,7 +517,7 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		deshabilitarCampos();
 		accionAgregar = 0;
 		accionModificar = 0;
-		limpiarCampos();
+		limpiar();
 		habilitarBotones(false);
 		btnAgregar.setEnabled(true);
 		btnCancelar.setEnabled(false);
@@ -525,7 +529,7 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		if (logica.getController().elimnarUsuario(usuarioSelecionado.getId())) {
 			JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente");
 			deshabilitarCampos();
-			limpiarCampos();
+			limpiar();
 			usuarioSelecionado = null;
 			limpiarBusqueda();
 			habilitarBotones(false);
@@ -551,7 +555,7 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		if (logica.getController().modicarUsuario(usuario)) {
 			JOptionPane.showMessageDialog(this, "Usuario modificado correctamente");
 			deshabilitarCampos();
-			limpiarCampos();
+			limpiar();
 			usuarioSelecionado = null;
 			habilitarBotones(false);
 			accionModificar = 0;
@@ -575,9 +579,9 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 
 		if (logica.getController().agregarUsuario(usuario)) {
 			int res = JOptionPane.showConfirmDialog(this, "Usuario agregado correctamente \n ¿Desea continuar?",
-					"GNA Software dice:", 0);
+					"Software de gestión de cobranza dice:", 0);
 
-			limpiarCampos();
+			limpiar();
 			cargarUsuarios();
 			if (res == 0) {
 				txtNombre.requestFocus();
@@ -614,7 +618,25 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		cbmxTipo.setEnabled(true);
 	}
 
-	private void limpiarCampos() {
+	public void limpiarBusqueda() {
+		txtBuscar.setText("Busqueda por cédula, nombre o teléfono");
+		txtBuscar.setForeground(Color.GRAY);
+		cargarUsuarios();
+	}
+
+	@Override
+	public void reiniciar() {
+		limpiar();
+		limpiarBusqueda();
+		habilitarBotones(false);
+		deshabilitarCampos();
+		btnAgregar.setEnabled(true);
+		btnCancelar.setEnabled(false);
+		btnAgregar.requestFocus();
+	}
+
+	@Override
+	public void limpiar() {
 		txtCodigo.setText("");
 		txtNombre.setText("");
 		txtApellido.setText("");
@@ -624,24 +646,5 @@ public class ModuloUsuarios extends ModuloGeneral implements ActionListener {
 		txtPassword.setText("");
 		txtConfirmPass.setText("");
 		cbmxTipo.setSelectedItem(0);
-
-	}
-
-	public void recargarModulo() {
-
-		limpiarCampos();
-		limpiarBusqueda();
-		habilitarBotones(false);
-		deshabilitarCampos();
-		btnAgregar.setEnabled(true);
-		btnCancelar.setEnabled(false);
-		btnAgregar.requestFocus();
-
-	}
-
-	public void limpiarBusqueda() {
-		txtBuscar.setText("Busqueda por cedula, nombre o telefono");
-		txtBuscar.setForeground(Color.GRAY);
-		cargarUsuarios();
 	}
 }

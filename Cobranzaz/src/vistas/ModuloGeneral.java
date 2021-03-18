@@ -2,6 +2,10 @@ package vistas;
 
 import javax.swing.JFrame;
 
+/**
+ * @author Paramo
+ * Módulo general que debe ser extendido por los demas módulos
+ */
 public class ModuloGeneral extends JFrame {
 
 	private Inicio inicio;

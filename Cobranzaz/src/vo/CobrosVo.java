@@ -1,5 +1,8 @@
 package vo;
 
+/**
+ * @author paramo
+ */
 import java.util.Date;
 
 public class CobrosVo {
@@ -8,7 +11,7 @@ public class CobrosVo {
 	private Date fechaOportuna, fechaDePago;
 	private double capital, abonos, deudaActual, intereses, honorarios, mora;
 	private int diasVencidos, estados;
-	private DeudaVo deuda;
+	private CreditoVo deuda;
 
 	public long getId() {
 		return id;
@@ -74,11 +77,11 @@ public class CobrosVo {
 		this.estados = estados;
 	}
 
-	public DeudaVo getDeuda() {
+	public CreditoVo getDeuda() {
 		return deuda;
 	}
 
-	public void setDeuda(DeudaVo deuda) {
+	public void setDeuda(CreditoVo deuda) {
 		this.deuda = deuda;
 	}
 

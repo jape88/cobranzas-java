@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import paneles.PnlConFondo;
 import recursos.Utilidades;
 import vo.CobrosVo;
-import vo.DeudaVo;
+import vo.CreditoVo;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,7 +21,6 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.border.MatteBorder;
 import javax.swing.JScrollPane;
@@ -29,13 +28,16 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import logica.Logica;
+import controladores.Logica;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 
+/**
+ * @author Paramo
+ * Vista para los cobros
+ */
 public class DialogViewCobros extends JDialog {
 
 	private final JPanel contentPanel = new PnlConFondo("/assets/imagen 70.png");
@@ -43,7 +45,7 @@ public class DialogViewCobros extends JDialog {
 	// Botones
 	private JButton btnAceptar;
 	private JTable table;
-	private DeudaVo deuda;
+	private CreditoVo deuda;
 	private Logica logica;
 
 	private ArrayList<CobrosVo> listaCobros;
@@ -64,7 +66,7 @@ public class DialogViewCobros extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DialogViewCobros(JFrame owner, DeudaVo deuda, Logica logica) {
+	public DialogViewCobros(JFrame owner, CreditoVo deuda, Logica logica) {
 		super(owner);
 		setModal(true);
 		this.deuda = deuda;
@@ -203,7 +205,7 @@ public class DialogViewCobros extends JDialog {
 		lblSaldoInicial.setForeground(Color.BLUE);
 		lblSaldoInicial.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Interes mora");
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Interés mora");
 		lblNewLabel_1_1_1_1.setBounds(10, 41, 80, 14);
 		panel_1.add(lblNewLabel_1_1_1_1);
 		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 12));

@@ -1,8 +1,6 @@
 package vistas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -11,12 +9,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -27,7 +23,7 @@ import vo.CobranzaVo;
 
 import javax.swing.border.TitledBorder;
 
-import logica.Logica;
+import controladores.Logica;
 import menu.MenuBar;
 
 import javax.swing.SwingConstants;
@@ -36,6 +32,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * @author paramo
+ * Módulo para configuraciones del sistema
+ */
 public class Configuracion extends ModuloGeneral implements ActionListener {
 
 	private Inicio inicio;
@@ -120,7 +120,7 @@ public class Configuracion extends ModuloGeneral implements ActionListener {
 		lblNewLabel.setBounds(158, 30, 125, 14);
 		panel_1.add(lblNewLabel);
 
-		JLabel lblTelefono = new JLabel("Telefono");
+		JLabel lblTelefono = new JLabel("Teléfono");
 		lblTelefono.setFont(new Font("Verdana", Font.PLAIN, 12));
 		lblTelefono.setBounds(157, 79, 125, 14);
 		panel_1.add(lblTelefono);
@@ -320,7 +320,7 @@ public class Configuracion extends ModuloGeneral implements ActionListener {
 			good = false;
 		}
 		if (txtTelefono.getText().toString().equals("")) {
-			mensaje += "Telefono del parqueadero. \n";
+			mensaje += "Teléfono del parqueadero. \n";
 			if (primerError == 0) {
 				txtTelefono.requestFocus();
 				primerError++;

@@ -8,23 +8,18 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
-import logica.Logica;
+import controladores.Logica;
 import paneles.PnlConFondo;
 import paneles.PnlFormAcreedor;
 import recursos.Utilidades;
 import vistas.ModuloCobranzas;
 import vo.AcreedorVo;
 
-import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 import java.awt.event.KeyAdapter;
@@ -34,6 +29,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 
+/**
+ * @author Paramo
+ * Vista para agregar acreedor rápido
+ */
 public class DialogAcreedor extends JDialog {
 
 	private final JPanel contentPanel = new PnlConFondo("/assets/imagen 70.png");

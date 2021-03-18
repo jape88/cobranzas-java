@@ -8,40 +8,33 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
-import logica.Logica;
+import controladores.Logica;
 import paneles.PnlConFondo;
 import paneles.PnlFormCliente;
 import recursos.Utilidades;
 import vistas.ModuloCobranzas;
-import vo.AcreedorVo;
 import vo.CiudadVo;
 import vo.ClientesVo;
 
-import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
-import javax.xml.transform.Source;
 
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 
+/**
+ * @author Paramo
+ * Vista para agregar cliente rápido
+ */
 public class DialogCliente extends JDialog implements KeyListener {
 
 	private final JPanel contentPanel = new PnlConFondo("/assets/imagen 70.png");

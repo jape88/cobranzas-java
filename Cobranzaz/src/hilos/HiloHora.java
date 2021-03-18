@@ -4,6 +4,10 @@ import java.util.Calendar;
 
 import javax.swing.JLabel;
 
+/**
+ * @author Paramo
+ * Hilo para mostar la hora.
+ */
 public class HiloHora extends Thread {
 
 	private JLabel lbHora;

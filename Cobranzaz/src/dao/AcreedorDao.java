@@ -11,6 +11,9 @@ import vo.CiudadVo;
 import vo.ClientesVo;
 import vo.DepartamentoVo;
 
+/**
+ * @author Paramo
+ */
 public class AcreedorDao {
 
 	private Conexion conn;

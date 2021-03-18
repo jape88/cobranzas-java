@@ -13,6 +13,10 @@ import vistas.Configuracion;
 import vistas.InfoView;
 import vistas.Inicio;
 
+/**
+ * @author paramo
+ * Menu bar que puede ser utilizado en los módulos
+ */
 public class MenuBar extends JMenuBar implements ActionListener {
 
 	private JFrame frameActual;

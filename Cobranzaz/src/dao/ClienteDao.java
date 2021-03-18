@@ -12,6 +12,9 @@ import vo.CiudadVo;
 import vo.ClientesVo;
 import vo.DepartamentoVo;
 
+/**
+ * @author Paramo
+ */
 public class ClienteDao {
 
 	private Conexion conn;

@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+/**
+ * @author Paramo
+ * Panel con el formulario para agregar un cliente
+ */
 public class PnlFormCliente extends JPanel implements KeyListener {
 
 	private URL url;
@@ -46,7 +50,7 @@ public class PnlFormCliente extends JPanel implements KeyListener {
 
 		setLayout(null);
 
-		JLabel lblCodigo = new JLabel("Codigo");
+		JLabel lblCodigo = new JLabel("Código");
 		lblCodigo.setBounds(10, 25, 80, 20);
 		add(lblCodigo);
 		lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -56,7 +60,7 @@ public class PnlFormCliente extends JPanel implements KeyListener {
 		add(txtCodigo);
 		txtCodigo.setColumns(10);
 
-		lblNewLabel_6 = new JLabel("Telefono 1");
+		lblNewLabel_6 = new JLabel("Teléfono 1");
 		lblNewLabel_6.setBounds(286, 25, 80, 20);
 		add(lblNewLabel_6);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -66,7 +70,7 @@ public class PnlFormCliente extends JPanel implements KeyListener {
 		add(txtCelular1);
 		txtCelular1.setColumns(10);
 
-		JLabel lblCedula = new JLabel("Cedula");
+		JLabel lblCedula = new JLabel("Cédula");
 		lblCedula.setBounds(10, 56, 80, 20);
 		add(lblCedula);
 		lblCedula.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -111,7 +115,7 @@ public class PnlFormCliente extends JPanel implements KeyListener {
 		add(lblDepartamento);
 		lblDepartamento.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-		JLabel lblCelular = new JLabel("Telefono 2");
+		JLabel lblCelular = new JLabel("Teléfono 2");
 		lblCelular.setBounds(286, 56, 80, 20);
 		add(lblCelular);
 		lblCelular.setFont(new Font("Tahoma", Font.BOLD, 12));

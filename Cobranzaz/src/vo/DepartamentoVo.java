@@ -1,5 +1,8 @@
 package vo;
 
+/**
+ * @author paramo
+ */
 public class DepartamentoVo  {
 
 	private long id;

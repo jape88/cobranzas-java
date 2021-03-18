@@ -14,6 +14,9 @@ import vo.CobranzaVo;
 import vo.DepartamentoVo;
 import vo.UsuarioVo;
 
+/**
+ * @author Paramo
+ */
 public class UsuarioDao {
 
 	private Conexion conn;

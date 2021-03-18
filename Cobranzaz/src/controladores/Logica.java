@@ -1,7 +1,11 @@
-package logica;
+package controladores;
 
 import vistas.Inicio;
 
+/**
+ * @author paramo
+ * Controlador principal que almacena vista principl y controlador con los Dao
+ */
 public class Logica {
 
 	private CobranzaControler controller;
@@ -9,7 +13,7 @@ public class Logica {
 
 	public Logica(Inicio ventanaPrincipal) {
 		controller = new CobranzaControler();
-		controller.iniciarParqueadero();
+		controller.iniciar();
 		this.setVentanaPrincipal(ventanaPrincipal);
 	}
 

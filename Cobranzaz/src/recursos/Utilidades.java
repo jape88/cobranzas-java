@@ -16,6 +16,10 @@ import javax.swing.JOptionPane;
 import vistas.Inicio;
 import vistas.ModuloGeneral;
 
+/**
+ * @author paramo
+ * Clase para almacenar constantes y metodos reutilizables en el sistema.
+ */
 public class Utilidades {
 
 	public final static int ESTADO_DEUDA_PENDIENTE = 1;
@@ -148,7 +152,7 @@ public class Utilidades {
 	}
 
 	public static void volverInicio(ModuloGeneral moduloActual) {
-		int res = JOptionPane.showConfirmDialog(null, "¿Volver a la pagina principal?", "Software de gestión de cobranza dice", JOptionPane.YES_NO_OPTION);
+		int res = JOptionPane.showConfirmDialog(null, "¿Volver a la página principal?", "Software de gestión de cobranza dice", JOptionPane.YES_NO_OPTION);
 		if (res == 0) {
 			moduloActual.dispose();
 			moduloActual.getInicio().setVisible(true);

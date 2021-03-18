@@ -1,5 +1,8 @@
 package vo;
 
+/**
+ * @author paramo
+ */
 public class ClientesVo {
 
 	private long id, cedula;

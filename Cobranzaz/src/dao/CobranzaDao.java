@@ -9,6 +9,9 @@ import controladores.Conexion;
 import recursos.Utilidades;
 import vo.CobranzaVo;
 
+/**
+ * @author Paramo
+ */
 public class CobranzaDao {
 
 	private Conexion conn;

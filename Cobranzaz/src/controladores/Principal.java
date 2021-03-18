@@ -5,10 +5,13 @@ import java.awt.EventQueue;
 import javax.swing.UIManager;
 
 import hilos.HiloHora;
-import logica.Logica;
 import vistas.Inicio;
 import vistas.Login;
 
+/**
+ * @author Paramo
+ * Controlador con el metodo main que inicia la ventana principal y la logica del negocio
+ */
 public class Principal {
 
 	private static Logica miLogica;

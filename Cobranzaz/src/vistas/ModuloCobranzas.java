@@ -18,15 +18,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import logica.Logica;
+import controladores.Logica;
 import paneles.PnlConFondo;
 import paneles.PnlFooter;
 import paneles.PnlHead;
 import recursos.Utilidades;
 import vo.AcreedorVo;
-import vo.CiudadVo;
 import vo.ClientesVo;
-import vo.DeudaVo;
+import vo.CreditoVo;
 
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
@@ -44,13 +43,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.swing.UIManager;
 import com.toedter.calendar.JDateChooser;
@@ -62,8 +56,11 @@ import dialogs.DialogViewCobros;
 import java.awt.Cursor;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-import com.toedter.components.JSpinField;
 
+/**
+ * @author paramo
+ * Módulo para gestión de créditos
+ */
 public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 
 	private JPanel contentPane;
@@ -85,7 +82,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 	// 0 para empezar a agregar
 	// 1 para finalizar agregar
 	private int accionAgregar = 0;
-	protected DeudaVo deudaSelecionado;
+	protected CreditoVo deudaSelecionado;
 
 	// 0 para empezar a modicar
 	// 1 para finalizar modicar
@@ -112,7 +109,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 	private AcreedorVo AcreedorDeuda;
 	protected String otroDocumento;
 	private JLabel lblOtroDocumento;
-	private ArrayList<DeudaVo> listaDeudad;
+	private ArrayList<CreditoVo> listaDeudad;
 	private double deudaCapital;
 	private double interes;
 	private double interesMora;
@@ -148,7 +145,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 
-		setTitle("Sistema de gestión de datos GNA");
+		setTitle("Sistema de gestión de créditos");
 
 		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -211,7 +208,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 				habilitarBotones(true);
 			}
 		});
-		tableModel = new DefaultTableModel(new Object[][] {}, new String[] { "Cedula", "Nombre", "Tipo documento",
+		tableModel = new DefaultTableModel(new Object[][] {}, new String[] { "Cédula", "Nombre", "Tipo documento",
 				"Modalidad de cobro", "Total a pagar", "Abonos generados", "Deuda actual" }) {
 
 			Class<?>[] columnTypes = new Class[] { Object.class, Object.class, Object.class, Object.class, Double.class,
@@ -300,20 +297,20 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 		btnEliminar.setBounds(250, 339, 110, 23);
 		panelCenter.add(btnEliminar);
 
-		JLabel lblModuloDeClientes = new JLabel("Modulo para gesti\u00F3n de cartera");
+		JLabel lblModuloDeClientes = new JLabel("Módulo para gesti\u00F3n de cartera");
 		lblModuloDeClientes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblModuloDeClientes.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblModuloDeClientes.setBounds(0, 116, 810, 20);
 		panelCenter.add(lblModuloDeClientes);
 
 		JPanel panel_1 = new PnlConFondo("/assets/imagen 70.png");
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos de la deuda",
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos del crédito",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_1.setBounds(10, 139, 533, 189);
 		panelCenter.add(panel_1);
 		panel_1.setLayout(null);
 
-		JLabel lblCodigo = new JLabel("Cedula Cliente");
+		JLabel lblCodigo = new JLabel("Cédula Cliente");
 		lblCodigo.setBounds(10, 54, 106, 20);
 		panel_1.add(lblCodigo);
 		lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -358,7 +355,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 			public void itemStateChanged(ItemEvent e) {
 				{
 					if (cmbxDocumento.getSelectedIndex() == 6 && otroDocumento.equals("")) {
-						otroDocumento = JOptionPane.showInputDialog(null, "Especifique", "GNA Software dice:",
+						otroDocumento = JOptionPane.showInputDialog(null, "Especifique", "Software de gestión de cobranza dice:",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else if (cmbxDocumento.getSelectedIndex() != 6) {
 						otroDocumento = "";
@@ -393,7 +390,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 		panel_1.add(lblDepartamento);
 		lblDepartamento.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-		JLabel lblCelular = new JLabel("Tasa de interes");
+		JLabel lblCelular = new JLabel("Tasa de interés");
 		lblCelular.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCelular.setBounds(316, 54, 117, 20);
 		panel_1.add(lblCelular);
@@ -571,7 +568,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-					int res = JOptionPane.showConfirmDialog(null, "¿Desea calcular ahora?", "GNA Software dice:",
+					int res = JOptionPane.showConfirmDialog(null, "¿Desea calcular ahora?", "Software de gestión de cobranza dice:",
 							JOptionPane.YES_NO_OPTION);
 					if (res == JOptionPane.YES_OPTION) {
 						calcularAhora();
@@ -810,7 +807,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 		tableModel.setRowCount(0);
 		Object[] fila = null;
 
-		for (DeudaVo deuda : listaDeudad) {
+		for (CreditoVo deuda : listaDeudad) {
 			fila = new Object[7];
 			fila[0] = deuda.getClientes().getCedula();
 			fila[1] = deuda.getClientes().getNombre() + " " + deuda.getClientes().getApellido();
@@ -840,7 +837,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 		} else if (e.getSource() == btnAgregar) {
 
 			if (accionAgregar == 0) {
-				int res = JOptionPane.showConfirmDialog(this, "¿Desea agregar una nueva deuda?", "GNA Software dice:",
+				int res = JOptionPane.showConfirmDialog(this, "¿Desea agregar una nueva deuda?", "Software de gestión de cobranza dice:",
 						0);
 				if (res == 0) {
 					accionAgregar = 1;
@@ -853,7 +850,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 				}
 			} else if (accionAgregar == 1) {
 				int res = JOptionPane.showConfirmDialog(this, "¿Todo listo para guardar y generar cobros?",
-						"GNA Software dice", JOptionPane.YES_NO_OPTION);
+						"Software de gestión de cobranza dice:", JOptionPane.YES_NO_OPTION);
 				if (res == JOptionPane.YES_OPTION) {
 					aregarDeuda();
 				}
@@ -863,7 +860,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 			if (deudaSelecionado != null) {
 				if (accionModificar == 0) {
 					int res = JOptionPane.showConfirmDialog(this, "¿Desea modicar los datos de la deuda?",
-							"GNA Software dice:", 0);
+							"Software de gestión de cobranza dice:", 0);
 					if (res == 0) {
 						btnModificar.setText("Guardar");
 						accionModificar = 1;
@@ -884,15 +881,15 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 			if (deudaSelecionado != null) {
 
 				int res = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea elimnar la deuda?",
-						"GNA Software dice:", 0);
+						"Software de gestión de cobranza dice:", 0);
 				if (res == 0) {
-					String codigo = JOptionPane.showInputDialog("Ingrese codigo de seguridad");
+					String codigo = JOptionPane.showInputDialog("Ingrese código de seguridad");
 					if (codigo.equals("25057")) {
 						eliminarDeuda();
 						deudaSelecionado = null;
 						cargarDeudas();
 					} else
-						JOptionPane.showMessageDialog(this, "Codigo incorrecto, por favor intente nuevamente");
+						JOptionPane.showMessageDialog(this, "Código incorrecto, por favor intente nuevamente");
 				}
 
 			} else
@@ -900,7 +897,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 		} else if (e.getSource() == btnCancelar) {
 			cancelarAccion();
 		} else if (e.getSource() == btnCobros) {
-			int res = JOptionPane.showConfirmDialog(this, "¿Desea ver estado de cobors?", "GNA Software dice:",
+			int res = JOptionPane.showConfirmDialog(this, "¿Desea ver estado de cobors?", "Software de gestión de cobranza dice:",
 					JOptionPane.YES_NO_OPTION);
 			if (res == JOptionPane.YES_OPTION) {
 				abrirDialogCobros();
@@ -924,7 +921,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 				cmbxDocumento.requestFocus();
 			} else {
 				int res = JOptionPane.showConfirmDialog(this, "El acreedor no existe ¿Desea crearlo?",
-						"GNA Software dice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+						"Software de gestión de cobranza dice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (res == JOptionPane.YES_OPTION) {
 					DialogAcreedor dialogAcreedor = new DialogAcreedor(this, logica);
 					dialogAcreedor.getTxtCedula().setText(cedula);
@@ -933,7 +930,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 				}
 			}
 		} else
-			JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "GNA Software dice:",
+			JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "Software de gestión de cobranza dice:",
 					JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -947,7 +944,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 				txtCedulaAcreedor.requestFocus();
 			} else {
 				int res = JOptionPane.showConfirmDialog(this, "El cliente no existe ¿Desea crearlo?",
-						"GNA Software dice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+						"Software de gestión de cobranza dice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (res == JOptionPane.YES_OPTION) {
 					DialogCliente dialogCliente = new DialogCliente(this, logica);
 					dialogCliente.getTxtCedula().setText(cedula);
@@ -957,7 +954,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 				}
 			}
 		} else
-			JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "GNA Software dice:",
+			JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "Software de gestión de cobranza dice:",
 					JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -1036,7 +1033,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 	}
 
 	private void aregarDeuda() {
-		DeudaVo deuda = new DeudaVo();
+		CreditoVo deuda = new CreditoVo();
 
 		deuda.setFecha(Utilidades.formatoFecha(txtFecha.getDate()));
 		deuda.setFechaCalculos(txtFecha.getDate());
@@ -1069,7 +1066,7 @@ public class ModuloCobranzas extends ModuloGeneral implements ActionListener {
 
 		if (logica.getController().agregarDeuda(deuda)) {
 			int res = JOptionPane.showConfirmDialog(this,
-					"Deuda agregada correctamente \n ¿Desea agregar otra deuda de un cliente?", "GNA Software dice:",
+					"Deuda agregada correctamente \n ¿Desea agregar otra deuda de un cliente?", "Software de gestión de cobranza dice:",
 					0);
 
 			limpiarCampos();

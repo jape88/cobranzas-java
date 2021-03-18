@@ -8,18 +8,21 @@ import java.util.ArrayList;
 import controladores.Conexion;
 import recursos.Utilidades;
 import vo.CobrosVo;
-import vo.DeudaVo;
+import vo.CreditoVo;
 
+/**
+ * @author Paramo
+ */
 public class CobrosDao {
 
 	private Conexion conn;
 
-	public ArrayList<CobrosVo> listaCobrosPorDeuda(DeudaVo deuda) {
+	public ArrayList<CobrosVo> listaCobrosPorDeuda(CreditoVo deuda) {
 		ArrayList<CobrosVo> listaCobros = new ArrayList<CobrosVo>();
 		conn = new Conexion();
 		CobrosVo cobro;
 		String sql = "SELECT a.id,a.estado,a.fecha_de_pago_oportuno,a.fecha_de_pago,a.dias_vencido,a.cuota_capital,a.intereses,a.honorarios,a.mora,a.abonos,a.cuota_total "
-				+ "FROM cobros a WHERE a.id_deuda='" + deuda.getId() + "'";
+				+ "FROM cobros a WHERE a.id_credito='" + deuda.getId() + "'";
 		try {
 			Statement sentencia = conn.getConnection().createStatement(ResultSet.TYPE_FORWARD_ONLY,
 					ResultSet.CONCUR_READ_ONLY);
@@ -72,7 +75,7 @@ public class CobrosDao {
 		conn = new Conexion();
 		CobrosVo cobro;
 		String sql = "SELECT a.id,a.estado,a.fecha_de_pago_oportuno,a.fecha_de_pago,a.dias_vencido,a.cuota_capital,a.intereses,a.honorarios,a.mora,a.abonos,a.cuota_total "
-				+ "FROM cobros a LEFT JOIN deuda_cliente b ON a.id_deuda=b.id WHERE b.id_cliente='" + idCliente
+				+ "FROM cobros a LEFT JOIN creditos b ON a.id_credito=b.id WHERE b.id_cliente='" + idCliente
 				+ "' AND b.id_acreedor='" + idAcreedor + "'";
 
 		try {

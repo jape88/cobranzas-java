@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GNACobranzaz.iml" filepath="$PROJECT_DIR$/GNACobranzaz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CobranzaSoft.iml" filepath="$PROJECT_DIR$/CobranzaSoft.iml" />
     </modules>
   </component>
 </project>

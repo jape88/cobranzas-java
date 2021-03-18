@@ -1,8 +1,11 @@
 package vo;
 
+/**
+ * @author paramo
+ */
 import java.util.Date;
 
-public class DeudaVo {
+public class CreditoVo {
 
 	private long id;
 	private ClientesVo clientes;

@@ -22,6 +22,10 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * @author paramo
+ * Vista con información del sistema y soporte
+ */
 public class InfoView extends JFrame {
 
 	private JPanel contentPane;

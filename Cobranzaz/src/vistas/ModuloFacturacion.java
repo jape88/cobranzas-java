@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-import javax.swing.CellEditor;
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,9 +18,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 
-import logica.Logica;
+import controladores.Logica;
 import paneles.PnlConFondo;
 import paneles.PnlFooter;
 import paneles.PnlHead;
@@ -30,7 +27,7 @@ import recursos.Utilidades;
 import vo.AcreedorVo;
 import vo.ClientesVo;
 import vo.CobrosVo;
-import vo.DeudaVo;
+import vo.CreditoVo;
 
 import java.awt.FlowLayout;
 import javax.swing.border.TitledBorder;
@@ -56,6 +53,10 @@ import java.awt.ComponentOrientation;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
+/**
+ * @author Paramo
+ * Módulo para gestión de facturación
+ */
 public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 
 	private JPanel contentPane;
@@ -69,7 +70,7 @@ public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 	private JTextField txtCedula;
 	private JButton btnFacturar;
 
-	protected DeudaVo deudaSelecionado;
+	protected CreditoVo deudaSelecionado;
 
 	private JButton btnCancelar;
 	private JButton btnBuscarCliente;
@@ -119,7 +120,7 @@ public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 897, 540);
 		setLocationRelativeTo(null);
-		setTitle("Sistema de gestión de datos GNA");
+		setTitle("Sistema de gestión de datos facturación");
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -212,7 +213,7 @@ public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 		btnFacturar.setBounds(647, 476, 110, 23);
 		panelCenter.add(btnFacturar);
 
-		JLabel lblModuloDeClientes = new JLabel("Modulo para gestión de facturación");
+		JLabel lblModuloDeClientes = new JLabel("Módulo para gestión de facturación");
 		lblModuloDeClientes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblModuloDeClientes.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblModuloDeClientes.setBounds(0, 115, 897, 20);
@@ -225,7 +226,7 @@ public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 		panelCenter.add(panel_1);
 		panel_1.setLayout(null);
 
-		JLabel lblCodigo = new JLabel("Cedula Cliente");
+		JLabel lblCodigo = new JLabel("Cédula Cliente");
 		lblCodigo.setBounds(10, 25, 106, 20);
 		panel_1.add(lblCodigo);
 		lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -257,7 +258,7 @@ public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 		panel_1.add(txtCedulaAcreedor);
 		txtCedulaAcreedor.setColumns(10);
 
-		JLabel lblNewLabel_4 = new JLabel("Cedula Acreedor");
+		JLabel lblNewLabel_4 = new JLabel("Cèdula Acreedor");
 		lblNewLabel_4.setBounds(10, 50, 106, 20);
 		panel_1.add(lblNewLabel_4);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -607,7 +608,7 @@ public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 				btnCargarUltimo.requestFocus();
 			} else {
 				int res = JOptionPane.showConfirmDialog(this, "El acreedor no existe ¿Desea crearlo?",
-						"GNA Software dice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+						"Software de gestión de cobranza dice:", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (res == JOptionPane.YES_OPTION) {
 					DialogAcreedor dialogAcreedor = new DialogAcreedor(this, logica);
 					dialogAcreedor.getTxtCedula().setText(cedula);
@@ -616,7 +617,7 @@ public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 				}
 			}
 		} else
-			JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "GNA Software dice:",
+			JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "Software de gestión de cobranza dice:",
 					JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -633,7 +634,7 @@ public class ModuloFacturacion extends ModuloGeneral implements ActionListener {
 				JOptionPane.showMessageDialog(this,
 						"El cliente no existe, debe crearlo para continuar o utilicé la búsqueda rápida");
 		} else
-			JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "GNA Software dice:",
+			JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "Software de gestión de cobranza dice:",
 					JOptionPane.WARNING_MESSAGE);
 	}
 

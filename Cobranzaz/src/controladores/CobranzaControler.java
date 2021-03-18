@@ -1,4 +1,4 @@
-package logica;
+package controladores;
 
 import java.util.ArrayList;
 
@@ -7,52 +7,51 @@ import dao.ClienteDao;
 import dao.CobranzaDao;
 import dao.CobrosDao;
 import dao.UsuarioDao;
-import dao.DeudaDao;
+import dao.CreditoDao;
 import vo.AcreedorVo;
 import vo.ClientesVo;
 import vo.CobranzaVo;
 import vo.CobrosVo;
-import vo.DeudaVo;
+import vo.CreditoVo;
 import vo.UsuarioVo;
 
+/**
+ * @author Paramo
+ * Controlador donde se alamacenan los Dao
+ */
 public class CobranzaControler {
 
-	private CobranzaVo myParqueadero;
+	private CobranzaVo myCobranza;
 
 	private UsuarioDao usuarioDao;
 	private ClienteDao clienteDao;
-	private CobranzaDao unParqueaderoDao;
-	private DeudaDao deudaDao;
+	private CobranzaDao unCobranzaDao;
+	private CreditoDao deudaDao;
 	private CobrosDao cobroDao;
 
 	private AcreedorDao acreedorDao;
 
-	public void iniciarParqueadero() {
-		myParqueadero = new CobranzaVo();
+	public void iniciar() {
+		myCobranza = new CobranzaVo();
 		clienteDao = new ClienteDao();
 		usuarioDao = new UsuarioDao();
 		acreedorDao = new AcreedorDao();
-		unParqueaderoDao = new CobranzaDao();
-		deudaDao = new DeudaDao();
+		unCobranzaDao = new CobranzaDao();
+		deudaDao = new CreditoDao();
 		cobroDao = new CobrosDao();
 	}
 
-	@Override
-	public String toString() {
-		return "ParqueaderoControler [myParqueadero=" + myParqueadero + ", usuarioDao=" + usuarioDao
-				+ ", unParqueaderoDao=" + unParqueaderoDao + "]";
-	}
 
 	public UsuarioVo devolverUsuario(String nombre) {
 		return usuarioDao.buscarUsuario(nombre);
 	}
 
 	public boolean agregarParqueadero(CobranzaVo parqueaderoVo) {
-		return unParqueaderoDao.agregarParqueadero(parqueaderoVo);
+		return unCobranzaDao.agregarParqueadero(parqueaderoVo);
 	}
 
 	public boolean modificarParqueadero(CobranzaVo parqueaderoVo) {
-		return unParqueaderoDao.modificarPark(parqueaderoVo);
+		return unCobranzaDao.modificarPark(parqueaderoVo);
 	}
 
 	public ArrayList<ClientesVo> listaClientes() {
@@ -109,19 +108,19 @@ public class CobranzaControler {
 		return acreedorDao.agregarACreedor(acreedor);
 	}
 
-	public boolean agregarDeuda(DeudaVo deuda) {
+	public boolean agregarDeuda(CreditoVo deuda) {
 		return deudaDao.agregarDeuda(deuda);
 	}
 
-	public ArrayList<DeudaVo> listaDeudas() {
+	public ArrayList<CreditoVo> listaDeudas() {
 		return deudaDao.listaDeudas();
 	}
 
-	public ArrayList<CobrosVo> listaCobros(DeudaVo deuda) {
+	public ArrayList<CobrosVo> listaCobros(CreditoVo deuda) {
 		return cobroDao.listaCobrosPorDeuda(deuda);
 	}
 
-	public boolean modificarDeuda(DeudaVo deudaSelecionado) {
+	public boolean modificarDeuda(CreditoVo deudaSelecionado) {
 		
 		return deudaDao.modificarDeuda(deudaSelecionado);
 	}

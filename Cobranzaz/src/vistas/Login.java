@@ -1,25 +1,19 @@
 package vistas;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.*;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import hilos.HiloCarga;
-import hilos.HiloHora;
-import logica.Logica;
+import controladores.Logica;
 import paneles.PnlConFondo;
 import paneles.PnlHead;
-import recursos.Utilidades;
 import vo.UsuarioVo;
 
 import javax.swing.SwingConstants;
@@ -27,6 +21,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
+/**
+ * @author paramo
+ * Ventana de login
+ */
 public class Login extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -35,7 +33,6 @@ public class Login extends JFrame implements ActionListener {
 	private JButton btnIniciarSesion;
 
 	private Inicio inicio;
-	private Cargando cargar;
 	private Logica logica;
 	private JLabel lbRequiere1;
 	private JLabel lbRequiere2;

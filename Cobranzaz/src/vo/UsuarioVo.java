@@ -1,5 +1,8 @@
 package vo;
 
+/**
+ * @author Paramo
+ */
 public class UsuarioVo {
 
 	private long id;

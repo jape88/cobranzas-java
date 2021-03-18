@@ -11,17 +11,18 @@ import java.util.Date;
 import controladores.Conexion;
 import recursos.Utilidades;
 import vo.AcreedorVo;
-import vo.CiudadVo;
 import vo.ClientesVo;
 import vo.CobrosVo;
-import vo.DepartamentoVo;
-import vo.DeudaVo;
+import vo.CreditoVo;
 
-public class DeudaDao {
+/**
+ * @author Paramo
+ */
+public class CreditoDao {
 
 	private Conexion conn;
 
-	public boolean agregarDeuda(DeudaVo deuda) {
+	public boolean agregarDeuda(CreditoVo deuda) {
 		conn = new Conexion();
 		try {
 			deuda.setId(Long.parseLong(Utilidades.llaveUnica()));
@@ -34,7 +35,7 @@ public class DeudaDao {
 				modalidad = "Quincenal";
 			}
 			sentencia.executeUpdate(
-					"INSERT INTO deuda_cliente (id, id_cliente, id_acreedor, documento, modelo, estado, deuda, interes, honorarios, mora, cuotas, total, fecha, valor_cuota, valor_extraordinario) "
+					"INSERT INTO creditos (id, id_cliente, id_acreedor, documento, modelo, estado, deuda, interes, honorarios, mora, cuotas, total, fecha, valor_cuota, valor_extraordinario) "
 							+ "VALUES ('" + deuda.getId() + "', '" + deuda.getClientes().getId() + "', '"
 							+ deuda.getAcreedor().getId() + "', '" + deuda.getDocumento() + "', '" + modalidad
 							+ "', 'Pendiente', '" + deuda.getDeudaCapital() + "', '" + deuda.getInteres() + "', " + "'"
@@ -60,7 +61,7 @@ public class DeudaDao {
 		return false;
 	}
 
-	public void agregarCobrosADeuda(DeudaVo deudaVo) {
+	public void agregarCobrosADeuda(CreditoVo deudaVo) {
 
 		// Preparamos valores iniciales
 		CobrosVo unCobro;
@@ -71,7 +72,7 @@ public class DeudaDao {
 		Date fechaActual = deudaVo.getFechaCalculos();
 		int modalidadCobro = deudaVo.getModalidad();
 		Calendar calendar = Calendar.getInstance();
-		String sql = "INSERT INTO cobros (id, id_deuda, fecha_de_pago_oportuno, cuota_capital, intereses, honorarios, mora ,cuota_total) VALUES";
+		String sql = "INSERT INTO cobros (id, id_credito, fecha_de_pago_oportuno, cuota_capital, intereses, honorarios, mora ,cuota_total) VALUES";
 
 		try {
 			for (int i = 0; i < deudaVo.getCuotas(); i++) {
@@ -116,16 +117,16 @@ public class DeudaDao {
 
 	}
 
-	public ArrayList<DeudaVo> listaDeudas() {
-		ArrayList<DeudaVo> listaDeudas = new ArrayList<DeudaVo>();
+	public ArrayList<CreditoVo> listaDeudas() {
+		ArrayList<CreditoVo> listaDeudas = new ArrayList<CreditoVo>();
 		conn = new Conexion();
-		DeudaVo deuda;
+		CreditoVo deuda;
 
 		String sql = "SELECT a.id,a.documento,a.modelo,a.estado,a.deuda,a.interes,"
 				+ "a.honorarios,a.mora,a.cuotas,a.total,a.fecha,a.valor_cuota," + "a.valor_extraordinario,"
 				+ "b.id id_cliente,b.cedula cedula_cliente,b.nombre nombre_cliente,b.apellido apellido_cliente,"
 				+ "c.id id_acreedor,c.cedula cedula_acreedor,c.nombre nombre_acreedor,c.apellido apellido_acreedor "
-				+ "FROM deuda_cliente a " + "LEFT JOIN clientes b ON a.id_cliente=b.id "
+				+ "FROM creditos a " + "LEFT JOIN clientes b ON a.id_cliente=b.id "
 				+ "LEFT JOIN acreedores c ON a.id_acreedor=c.id";
 
 		try {
@@ -134,7 +135,7 @@ public class DeudaDao {
 					ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs = sentencia.executeQuery(sql);
 			while (rs.next()) {
-				deuda = new DeudaVo();
+				deuda = new CreditoVo();
 				deuda.setId(rs.getLong("id"));
 				deuda.setDocumento(rs.getString("documento"));
 
@@ -189,7 +190,7 @@ public class DeudaDao {
 		return listaDeudas;
 	}
 
-	public boolean modificarDeuda(DeudaVo deudaSelecionado) {
+	public boolean modificarDeuda(CreditoVo deudaSelecionado) {
 		conn = new Conexion();
 		try {
 			String modalidad = "";
@@ -198,7 +199,7 @@ public class DeudaDao {
 			} else if (deudaSelecionado.getModalidad() == Utilidades.TIPO_QUINCENAL) {
 				modalidad = "Quincenal";
 			}
-			String sql = "UPDATE deuda_cliente SET id_cliente=?, id_acreedor=?, documento=?, modelo=?, deuda=?, interes=?, honorarios=?, mora=?, cuotas=?, total=? WHERE  id=?";
+			String sql = "UPDATE creditos SET id_cliente=?, id_acreedor=?, documento=?, modelo=?, deuda=?, interes=?, honorarios=?, mora=?, cuotas=?, total=? WHERE  id=?";
 			PreparedStatement sentencia = conn.getConnection().prepareStatement(sql);
 
 			sentencia.setLong(1, deudaSelecionado.getClientes().getId());

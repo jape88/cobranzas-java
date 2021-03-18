@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+/**
+ * @author paramo
+ */
 public class PnlFormAcreedor extends JPanel implements KeyListener {
 
 	private URL url;
@@ -37,7 +40,7 @@ public class PnlFormAcreedor extends JPanel implements KeyListener {
 		setBorder(new TitledBorder(null, "Datos del acreedor", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(null);
 
-		JLabel lblCedula = new JLabel("Cedula");
+		JLabel lblCedula = new JLabel("Cédula");
 		lblCedula.setBounds(10, 29, 60, 20);
 		add(lblCedula);
 		lblCedula.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -67,7 +70,7 @@ public class PnlFormAcreedor extends JPanel implements KeyListener {
 		add(txtApellido);
 		txtApellido.setColumns(10);
 
-		JLabel lblNewLabel_6 = new JLabel("Celular");
+		JLabel lblNewLabel_6 = new JLabel("Teléfono");
 		lblNewLabel_6.setBounds(10, 124, 60, 20);
 		add(lblNewLabel_6);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -77,7 +80,7 @@ public class PnlFormAcreedor extends JPanel implements KeyListener {
 		add(txtCelular);
 		txtCelular.setColumns(10);
 
-		JLabel lblNewLabel_6_1 = new JLabel("Correo");
+		JLabel lblNewLabel_6_1 = new JLabel("E-Mail");
 		lblNewLabel_6_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_6_1.setBounds(10, 155, 60, 20);
 		add(lblNewLabel_6_1);

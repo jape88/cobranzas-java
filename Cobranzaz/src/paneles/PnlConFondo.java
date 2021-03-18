@@ -7,6 +7,9 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+/**
+ * @author paramo
+ */
 public class PnlConFondo extends JPanel {
 
 	private URL url;

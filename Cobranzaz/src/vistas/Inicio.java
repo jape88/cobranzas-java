@@ -17,46 +17,27 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 
-import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
-import hilos.HiloHora;
-import logica.Logica;
+import controladores.Logica;
 import menu.MenuBar;
 
 import java.awt.event.ActionListener;
-import java.sql.Time;
 import java.awt.event.ActionEvent;
-import javax.swing.JTabbedPane;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Insets;
 import java.awt.Cursor;
 
+/**
+ * @author paramo
+ * Ventana principal home
+ */
 public class Inicio extends JFrame implements ActionListener {
 
 	private Logica logica;
@@ -83,7 +64,7 @@ public class Inicio extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 781, 572);
 		setLocationRelativeTo(null);
-		setTitle("Sistema de gestión de datos GNA");
+		setTitle("Sistema de gestión de cobranza");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -197,7 +178,7 @@ public class Inicio extends JFrame implements ActionListener {
 	}
 
 	protected void exit() {
-		int x = JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?", "GNA Software dice", 0);
+		int x = JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?", "Software de gestión de cobranza dice:", 0);
 		if (x == 0) {
 			System.exit(0);
 		}

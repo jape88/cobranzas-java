@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @author Paramo
+ * Controlador que se encarga de realzar la conexión con la base de datos
+ */
 public class Conexion {
    static String bd = "bd_cobranza";
    static String login = "root";
