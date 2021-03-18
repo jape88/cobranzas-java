@@ -10,8 +10,8 @@ import java.sql.SQLException;
  */
 public class Conexion {
    static String bd = "bd_cobranza";
-   static String login = "root";
-   static String password = "";
+   static String login = "ceiba";
+   static String password = "ceiba";
    static String url = "jdbc:mysql://localhost:3306/"+bd;
 
    Connection conn = null;
